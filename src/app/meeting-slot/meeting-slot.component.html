@@ -1,4 +1,5 @@
 <div class="container">
+
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
@@ -25,10 +26,31 @@
         </tbody>
       </table>
     </div>
+
+    <div *ngIf="selectedMeeting">
+
+      <h2>Slot: {{ selectedMeeting.slot }}</h2>
+
+        <h2>Title: {{ selectedMeeting.title }}</h2>
+        <div>Description: {{ selectedMeeting.description }}</div>
+        <div>Participants: {{ selectedMeeting.participants }}</div>
+        <div>
+          <label>Title:
+            <input [(ngModel)]="selectedMeeting.title" placeholder="Title">
+          </label>
+          <label>Title:
+              <input [(ngModel)]="selectedMeeting.description" placeholder="Description">
+            </label>
+        </div>
+       
+      </div> 
+
   </div>
 
-<div>
+<!-- <div>
     <label>title:
       <input [(ngModel)]="meeting.title" placeholder="title">
     </label>
-</div>
+</div> -->
+
+
