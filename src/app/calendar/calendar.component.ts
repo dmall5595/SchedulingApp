@@ -22,6 +22,8 @@ import {
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
 
+import { DanCalendarEvent } from '../dancalendar';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -73,13 +75,15 @@ export class CalendarComponent {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
+  current_event: DanCalendarEvent;
+
   view: string = 'month';
 
   viewDate: Date = new Date();
 
   modalData: {
     action: string;
-    event: CalendarEvent;
+    event: DanCalendarEvent;
   };
 
   actions: CalendarEventAction[] = [
@@ -100,25 +104,28 @@ export class CalendarComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
+  events: DanCalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'A 3 day event',
       color: colors.red,
-      actions: this.actions
+      actions: this.actions,
+      description: ""
     },
     {
       start: startOfDay(new Date()),
       title: 'An event with no end date',
       color: colors.yellow,
-      actions: this.actions
+      actions: this.actions,
+      description: ""
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
       title: 'A long event that spans 2 months',
-      color: colors.blue
+      color: colors.blue,
+      description: ""
     },
     {
       start: addHours(startOfDay(new Date()), 2),
@@ -130,7 +137,8 @@ export class CalendarComponent {
         beforeStart: true,
         afterEnd: true
       },
-      draggable: true
+      draggable: true,
+      description: ""
     }
   ];
 
@@ -138,7 +146,7 @@ export class CalendarComponent {
 
   constructor(private modal: NgbModal) {}
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  dayClicked({ date, events }: { date: Date; events: DanCalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -163,12 +171,15 @@ export class CalendarComponent {
     this.refresh.next();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: any): void {
+    this.current_event = event;
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
+   
+
     this.events.push({
       title: 'New event',
       start: startOfDay(new Date()),
@@ -178,9 +189,18 @@ export class CalendarComponent {
       resizable: {
         beforeStart: true,
         afterEnd: true
-      }
+      },
+      description: ""
     });
     this.refresh.next();
+
+    var action = "yo"
+    console.log(this.events)
+    var event = this.events[this.events.length - 1]
+    
+    this.current_event = event;
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   // constructor() { }

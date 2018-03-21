@@ -14,7 +14,7 @@
   </div>
 </ng-template> -->
 
-<div *ngIf="events$ | async; else loading; let events">
+<!-- <div *ngIf="events$ | async; else loading; let events">
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
       *ngSwitchCase="'month'"
@@ -37,23 +37,66 @@
       (eventClicked)="eventClicked($event.event)">
     </mwl-calendar-day-view>
   </div>
-</div>
+</div> -->
 
 <ng-template #modalContent let-close="close">
     <div class="modal-header">
-      <h5 class="modal-title">Event action occurred</h5>
+      <h5 class="modal-title">Update Event</h5>
       <button type="button" class="close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <div>
+      <!-- <div>
         Action:
         <pre>{{ modalData?.action }}</pre>
-      </div>
+      </div> -->
       <div>
-        Event:
-        <pre>{{ modalData?.event | json }}</pre>
+        <!-- Event:
+        <pre>{{ modalData?.event | json }}</pre> --> 
+             
+        <p>Title
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="current_event.title"
+            (keyup)="refresh.next()">
+        </p>
+        <p>Description
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="current_event.description"
+            (keyup)="refresh.next()">
+        </p>
+        <p>Color
+            <input
+            type="color"
+            [(ngModel)]="current_event.color.primary"
+            (change)="refresh.next()">
+        </p>
+        <p>Starts at
+            <app-date-time-picker
+            [(ngModel)]="current_event.start"
+            (ngModelChange)="refresh.next()"
+            placeholder="Not set">
+          </app-date-time-picker>
+        </p>
+        <p>Ends at
+            <app-date-time-picker
+            [(ngModel)]="current_event.end"
+            (ngModelChange)="refresh.next()"
+            placeholder="Not set">
+          </app-date-time-picker>
+        </p>
+        <p>
+            <button
+            class="btn btn-danger"
+            (click)="events.splice(index, 1); refresh.next()">
+            Delete
+          </button>
+        </p>
+             
       </div>
     </div>
     <div class="modal-footer">
@@ -143,26 +186,26 @@
       (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-day-view>
   </div>
+
+  <br><br>
   
-  <br><br><br>
-  
-  <h3>
-    Edit events
-    <button
-      class="btn btn-primary pull-right"
+    <div class="text-center">
+      <button
+      class="btn btn-lg btn-primary"
       (click)="addEvent()">
       Add new
-    </button>
-    <div class="clearfix"></div>
-  </h3>
+      </button>
+    </div>
+    
   
-  <table class="table table-bordered">
+  
+  <!-- <table class="table table-bordered">
   
     <thead>
       <tr>
         <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
+        <th>Description</th>
+        <th>Color</th>
         <th>Starts at</th>
         <th>Ends at</th>
         <th>Remove</th>
@@ -180,14 +223,15 @@
         </td>
         <td>
           <input
-            type="color"
-            [(ngModel)]="event.color.primary"
-            (change)="refresh.next()">
+            type="text"
+            class="form-control"
+            [(ngModel)]="event.description"
+            (keyup)="refresh.next()">
         </td>
         <td>
           <input
             type="color"
-            [(ngModel)]="event.color.secondary"
+            [(ngModel)]="event.color.primary"
             (change)="refresh.next()">
         </td>
         <td>
@@ -214,4 +258,4 @@
       </tr>
     </tbody>
   
-  </table>
+  </table> -->
