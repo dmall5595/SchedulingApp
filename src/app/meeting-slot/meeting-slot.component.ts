@@ -12,8 +12,9 @@ export class MeetingSlotComponent implements OnInit {
   title = 'app';
   columns = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   times = new Array(37);
-  meetings = {}
-  realTime
+  meetings = {};
+  realTime;
+  dayOfWeek;
 
   onSelect(i, j) {
     console.log(i + "," + j)
@@ -45,6 +46,9 @@ export class MeetingSlotComponent implements OnInit {
       }
     }
     console.log(this.getDaysInMonth(4, 2018))
+    var current = new Date()
+    console.log(current.getDate(), current.getMonth() + 1)
+    this.dayOfWeek = this.columns[current.getDay()]
   }
 
   getTime(i) {
