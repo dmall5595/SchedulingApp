@@ -10,13 +10,20 @@ import { AppComponent } from './app.component';
 import { MeetingSlotComponent } from './meeting-slot/meeting-slot.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { DateTimePickerComponent } from './date-time-picker/date-time-picker.component';
+
+import {
+  NgbDatepickerModule,
+  NgbTimepickerModule
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     MeetingSlotComponent,
     CalendarComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    DateTimePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +31,9 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
     NgbModule.forRoot(),
     CalendarModule.forRoot(),
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbDatepickerModule.forRoot(),
+    NgbTimepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
