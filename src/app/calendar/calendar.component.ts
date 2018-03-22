@@ -2,8 +2,11 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  OnInit
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import {
   startOfDay,
   endOfDay,
@@ -45,7 +48,7 @@ const colors: any = {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -55,11 +58,47 @@ export class CalendarComponent {
 
   viewDate: Date = new Date();
 
+  events = []
+
   modalData: {
     action: string;
     event: DanCalendarEvent;
   };
 
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id)
+
+    var events = window.localStorage.getItem("events")
+    if (events) {
+
+      // for (var event in JSON.parse(events)) {
+      //   console.log(event)
+      // }
+
+      //this.events = JSON.parse(events)
+
+      // console.log(JSON.parse(events)[0])
+
+      var calEvents:DanCalendarEvent[] = JSON.parse(events)
+
+      // console.log(calEvents.length)
+
+      for (var i = 0; i < calEvents.length; i++) {
+        var event = calEvents[i]
+
+        event.start = new Date(event.start)
+        event.end = new Date(event.end)
+
+        this.events.push(event)
+
+      }
+
+      // console.log(event)
+
+    }
+  }
+  
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
@@ -78,7 +117,7 @@ export class CalendarComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events = []//: DanCalendarEvent[] = [
+  //: DanCalendarEvent[] = [
   //   {
   //     start: subDays(startOfDay(new Date()), 1),
   //     end: addDays(new Date(), 1),
@@ -118,7 +157,7 @@ export class CalendarComponent {
 
   activeDayIsOpen: boolean = false;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private route: ActivatedRoute,) {}
 
   dayClicked({ date, events }: { date: Date; events: DanCalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -189,6 +228,8 @@ export class CalendarComponent {
   saveEvent() {
     this.events.push(this.current_event);
     this.refresh.next();
+
+    window.localStorage.setItem('events', JSON.stringify(this.events))
   }
 
   addEventWeekDay(event) {

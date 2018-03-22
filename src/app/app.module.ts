@@ -16,6 +16,8 @@ import {
   NgbDatepickerModule,
   NgbTimepickerModule
 } from '@ng-bootstrap/ng-bootstrap';
+import { ChooseCalendarComponent } from './choose-calendar/choose-calendar.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {
     MeetingSlotComponent,
     CalendarComponent,
     CalendarHeaderComponent,
-    DateTimePickerComponent
+    DateTimePickerComponent,
+    ChooseCalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import {
     BrowserAnimationsModule,
     NgbDatepickerModule.forRoot(),
     NgbTimepickerModule.forRoot(),
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
