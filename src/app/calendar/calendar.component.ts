@@ -73,7 +73,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.calendar_name = this.route.snapshot.paramMap.get('id');
-    //console.log(id)
 
     var all_events = JSON.parse(window.localStorage.getItem("all_events"))
     if (!all_events) {
@@ -87,17 +86,7 @@ export class CalendarComponent implements OnInit {
     var events = window.localStorage.getItem(this.calendar_name)
     if (events) {
 
-      // for (var event in JSON.parse(events)) {
-      //   console.log(event)
-      // }
-
-      //this.events = JSON.parse(events)
-
-      // console.log(JSON.parse(events)[0])
-
       var calEvents:DanCalendarEvent[] = JSON.parse(events)
-
-      // console.log(calEvents.length)
 
       for (var i = 0; i < calEvents.length; i++) {
         var event = calEvents[i]
@@ -108,8 +97,6 @@ export class CalendarComponent implements OnInit {
         this.events.push(event)
 
       }
-
-      // console.log(event)
 
     }
   }
@@ -131,44 +118,6 @@ export class CalendarComponent implements OnInit {
   ];
 
   refresh: Subject<any> = new Subject();
-
-  //: DanCalendarEvent[] = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     description: ""
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     description: ""
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.blue,
-  //     description: ""
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: new Date(),
-  //     title: 'A draggable and resizable event',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true,
-  //     description: ""
-  //   }
-  // ];
 
   activeDayIsOpen: boolean = false;
 
@@ -221,9 +170,6 @@ export class CalendarComponent implements OnInit {
 
     var end_date = new Date(date.getTime())
     end_date = new Date(end_date.setMinutes(end_date.getMinutes() + 30))
-    
-    // console.log(date)
-    // console.log(end_date)  
 
     this.current_event = {
       title: '',
@@ -237,13 +183,10 @@ export class CalendarComponent implements OnInit {
       },
       description: ""
     };
-    //this.refresh.next();
 
     var action = ""
-    //console.log(this.events)
     var event = this.current_event
     
-    //this.current_event = event;
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
@@ -260,12 +203,10 @@ export class CalendarComponent implements OnInit {
 
   addEventWeekDay(event) {
     this.addEvent(event.day.date)
-    //console.log(event.day.date)
   }
 
   addEventDayView(event) {
     this.addEvent(event.date)
-    //console.log(event.date)
   }
 
   save_name() {
