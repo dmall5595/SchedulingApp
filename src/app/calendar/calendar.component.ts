@@ -54,6 +54,10 @@ export class CalendarComponent implements OnInit {
 
   current_event: DanCalendarEvent;
 
+  calendar_name:string;
+
+  show_name = false;
+
   view: string = 'month';
 
   viewDate: Date = new Date();
@@ -66,10 +70,19 @@ export class CalendarComponent implements OnInit {
   };
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id)
+    this.calendar_name = this.route.snapshot.paramMap.get('id');
+    //console.log(id)
 
-    var events = window.localStorage.getItem("events")
+    var all_events = JSON.parse(window.localStorage.getItem("all_events"))
+    if (!all_events) {
+      all_events = []
+    }
+    if (!all_events.includes(this.calendar_name)) {
+      all_events.push(this.calendar_name)
+      window.localStorage.setItem("all_events", JSON.stringify(all_events))
+    }
+    
+    var events = window.localStorage.getItem(this.calendar_name)
     if (events) {
 
       // for (var event in JSON.parse(events)) {
@@ -229,7 +242,7 @@ export class CalendarComponent implements OnInit {
     this.events.push(this.current_event);
     this.refresh.next();
 
-    window.localStorage.setItem('events', JSON.stringify(this.events))
+    window.localStorage.setItem(this.calendar_name, JSON.stringify(this.events))
   }
 
   addEventWeekDay(event) {
@@ -240,6 +253,12 @@ export class CalendarComponent implements OnInit {
   addEventDayView(event) {
     this.addEvent(event.date)
     //console.log(event.date)
+  }
+
+  save_name() {
+    console.log("wag")
+    this.show_name = true;
+
   }
 
 }

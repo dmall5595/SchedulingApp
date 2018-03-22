@@ -63,6 +63,13 @@
     </div>
   </ng-template>
 
+  <!-- <div *ngIf="!show_name">
+    <input type="text" placeholder="Calendar Name" class="form-control" [(ngModel)]="calendar_name" (keyup)="refresh.next()">
+    <button class="btn btn-danger" (click)="save_name()">Save</button>
+  </div> -->
+
+    <h3>{{ calendar_name }} </h3>
+
   
   <div class="row text-center">
     <div class="col-md-4">

@@ -13,12 +13,22 @@
     </div>
   </ng-template>
 
-<h1>Available Calendars</h1>
+<h3>Available Calendars</h3>
 <ul style="list-style-type: none; padding-left: 0">
   <li *ngFor="let choice of choices">
-    <!-- <a routerLink={{choice}} >{{choice['display_title']}}</a> -->
-    {{choice}}
+    <a routerLink={{choice}} >{{choice}}</a>
   </li>
 </ul>
 <!-- <button [ngStyle]="{'background-color':'#bec0d6'}" routerLink="/create-list" type="button" class="btn">Add List</button> -->
-<button [ngStyle]="{'background-color':'#bec0d6'}" routerLink="/calendar/yo" type="button" class="btn">Create New Calendar</button>
+
+<div *ngIf="!choices">
+  No calendars available, create a new one below!
+</div>
+
+<br>
+
+<div *ngIf="!show_name">
+    <input type="text" placeholder="Calendar Name" class="form-control" [(ngModel)]="calendar_name">
+</div>
+<br>
+<button type="submit" [disabled]="!calendar_name" [ngStyle]="{'background-color':'#bec0d6'}" routerLink={{calendar_name}} type="button" class="btn">Create New Calendar</button>

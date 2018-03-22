@@ -10,7 +10,7 @@ import { ChooseCalendarComponent } from './choose-calendar/choose-calendar.compo
 const routes: Routes = [
   // { path: '', redirectTo: '/calendar', pathMatch: 'full' },
   { path: '', component: ChooseCalendarComponent },
-  { path: 'calendar/:id', component: CalendarComponent },
+  { path: ':id', component: CalendarComponent },
   // { path: 'detail/:id', component: HeroDetailComponent },
   // { path: 'heroes', component: HeroesComponent }
 ];
