@@ -6,7 +6,7 @@ This is a personal scheduling app built on [Angular](https://angular.io/). It us
 
 ## Build Instructions
 
-To run app, first verify you are running at least node 6.9.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. If you need to install, you can download [here.](https://nodejs.org/en/download/)
+To run app, first verify you are running at least node 6.9.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. If you need to install either, you can download both [here.](https://nodejs.org/en/download/)
 
 Once you have that installed go to the directory where the project is located and enter `npm install`
 
