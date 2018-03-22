@@ -29,6 +29,12 @@ export class ChooseCalendarComponent implements OnInit {
   }
 
   //choices = [1, 2]
+
+  delete(choice) {
+    this.choices.splice(this.choices.indexOf(choice), 1)
+    window.localStorage.setItem("all_events", JSON.stringify(this.choices))
+    window.localStorage.removeItem(choice)
+  }
  
 
 }

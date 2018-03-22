@@ -16,7 +16,7 @@
 <h3>Available Calendars</h3>
 <ul style="list-style-type: none; padding-left: 0">
   <li *ngFor="let choice of choices">
-    <a routerLink={{choice}} >{{choice}}</a>
+    <a routerLink={{choice}} >{{choice}}</a> <i (click)="delete(choice)" class="fa fa-fw fa-times"></i>
   </li>
 </ul>
 <!-- <button [ngStyle]="{'background-color':'#bec0d6'}" routerLink="/create-list" type="button" class="btn">Add List</button> -->
