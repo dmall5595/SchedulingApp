@@ -180,8 +180,10 @@ export class CalendarComponent implements OnInit {
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
       ) {
+        if (!this.activeDayIsOpen) 
+          this.addEvent(date)
         this.activeDayIsOpen = false;
-        this.addEvent(date)
+        
       } else {
         this.activeDayIsOpen = true;
         this.viewDate = date;
@@ -208,6 +210,9 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(date): void {
+
+    if (this.activeDayIsOpen)
+      date = this.viewDate
 
     this.newEvent = true
    
