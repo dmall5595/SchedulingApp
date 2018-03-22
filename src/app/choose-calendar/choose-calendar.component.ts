@@ -15,7 +15,7 @@ export class ChooseCalendarComponent implements OnInit {
 
   ngOnInit() {
     this.choices = JSON.parse(window.localStorage.getItem("all_events"))
-    console.log(this.choices)
+    // console.log(this.choices)
     
     // for (var i = 0; i < this.c.length; i++) {
     //   var event = calEvents[i]
