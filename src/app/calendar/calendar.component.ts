@@ -39,32 +39,6 @@ const colors: any = {
   }
 };
 
-// import { Component, OnInit } from '@angular/core';
-
-// import { ChangeDetectionStrategy } from '@angular/core';
-// import { HttpClient, HttpParams } from '@angular/common/http';
-// import { map } from 'rxjs/operators/map';
-// import { CalendarEvent } from 'angular-calendar';
-// import {
-//   isSameMonth,
-//   isSameDay,
-//   startOfMonth,
-//   endOfMonth,
-//   startOfWeek,
-//   endOfWeek,
-//   startOfDay,
-//   endOfDay,
-//   format
-// } from 'date-fns';
-// import { Observable } from 'rxjs/Observable';
-// // import { colors } from '../demo-utils/colors';
-
-// interface Film {
-//   id: number;
-//   title: string;
-//   release_date: string;
-// }
-
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -104,43 +78,43 @@ export class CalendarComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: DanCalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      description: ""
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-      description: ""
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      description: ""
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true,
-      description: ""
-    }
-  ];
+  events = []//: DanCalendarEvent[] = [
+  //   {
+  //     start: subDays(startOfDay(new Date()), 1),
+  //     end: addDays(new Date(), 1),
+  //     title: 'A 3 day event',
+  //     color: colors.red,
+  //     actions: this.actions,
+  //     description: ""
+  //   },
+  //   {
+  //     start: startOfDay(new Date()),
+  //     title: 'An event with no end date',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //     description: ""
+  //   },
+  //   {
+  //     start: subDays(endOfMonth(new Date()), 3),
+  //     end: addDays(endOfMonth(new Date()), 3),
+  //     title: 'A long event that spans 2 months',
+  //     color: colors.blue,
+  //     description: ""
+  //   },
+  //   {
+  //     start: addHours(startOfDay(new Date()), 2),
+  //     end: new Date(),
+  //     title: 'A draggable and resizable event',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //     resizable: {
+  //       beforeStart: true,
+  //       afterEnd: true
+  //     },
+  //     draggable: true,
+  //     description: ""
+  //   }
+  // ];
 
   activeDayIsOpen: boolean = false;
 
@@ -153,6 +127,7 @@ export class CalendarComponent {
         events.length === 0
       ) {
         this.activeDayIsOpen = false;
+        this.addEvent(date)
       } else {
         this.activeDayIsOpen = true;
         this.viewDate = date;
@@ -177,13 +152,21 @@ export class CalendarComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
+  addEvent(date): void {
    
+    if (!date)
+      date = new Date()
 
-    this.events.push({
-      title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
+    var end_date = new Date(date.getTime())
+    end_date = new Date(end_date.setMinutes(end_date.getMinutes() + 30))
+    
+    // console.log(date)
+    // console.log(end_date)  
+
+    this.current_event = {
+      title: '',
+      start: date,
+      end: end_date,
       color: colors.red,
       draggable: true,
       resizable: {
@@ -191,104 +174,31 @@ export class CalendarComponent {
         afterEnd: true
       },
       description: ""
-    });
-    this.refresh.next();
+    };
+    //this.refresh.next();
 
-    var action = "yo"
-    console.log(this.events)
-    var event = this.events[this.events.length - 1]
+    var action = ""
+    //console.log(this.events)
+    var event = this.current_event
     
-    this.current_event = event;
+    //this.current_event = event;
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  // constructor() { }
+  saveEvent() {
+    this.events.push(this.current_event);
+    this.refresh.next();
+  }
 
-  // ngOnInit() {
-  // }
+  addEventWeekDay(event) {
+    this.addEvent(event.day.date)
+    //console.log(event.day.date)
+  }
 
+  addEventDayView(event) {
+    this.addEvent(event.date)
+    //console.log(event.date)
+  }
 
-  // view: string = 'month';
-
-  // viewDate: Date = new Date();
-
-  // events$; // : Observable<Array<CalendarEvent<{ film: Film }>>>;
-
-  // activeDayIsOpen: boolean = false;
-
-  // constructor(private http: HttpClient) {}
-
-  // ngOnInit(): void {
-  //   this.fetchEvents();
-  // }
-
-  // fetchEvents(): void {
-  //   const getStart: any = {
-  //     month: startOfMonth,
-  //     week: startOfWeek,
-  //     day: startOfDay
-  //   }[this.view];
-
-  //   const getEnd: any = {
-  //     month: endOfMonth,
-  //     week: endOfWeek,
-  //     day: endOfDay
-  //   }[this.view];
-
-  //   const params = new HttpParams()
-  //     .set(
-  //       'primary_release_date.gte',
-  //       format(getStart(this.viewDate), 'YYYY-MM-DD')
-  //     )
-  //     .set(
-  //       'primary_release_date.lte',
-  //       format(getEnd(this.viewDate), 'YYYY-MM-DD')
-  //     )
-  //     .set('api_key', '0ec33936a68018857d727958dca1424f');
-
-  //   this.events$ = this.http
-  //     .get('https://api.themoviedb.org/3/discover/movie', { params })
-  //     .pipe(
-  //       map(({ results }: { results: Film[] }) => {
-  //         return results.map((film: Film) => {
-  //           return {
-  //             title: film.title,
-  //             start: new Date(film.release_date),
-  //             color: "blue",
-  //             meta: {
-  //               film
-  //             }
-  //           };
-  //         });
-  //       })
-  //     );
-  // }
-
-  // dayClicked({
-  //   date,
-  //   events
-  // }: {
-  //   date: Date;
-  //   events: Array<CalendarEvent<{ film: Film }>>;
-  // }): void {
-  //   if (isSameMonth(date, this.viewDate)) {
-  //     if (
-  //       (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-  //       events.length === 0
-  //     ) {
-  //       this.activeDayIsOpen = false;
-  //     } else {
-  //       this.activeDayIsOpen = true;
-  //       this.viewDate = date;
-  //     }
-  //   }
-  // }
-
-  // eventClicked(event: CalendarEvent<{ film: Film }>): void {
-  //   window.open(
-  //     `https://www.themoviedb.org/movie/${event.meta.film.id}`,
-  //     '_blank'
-  //   );
-  // }
 }

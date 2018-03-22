@@ -1,4 +1,4 @@
-export interface DanCalendarEvent<MetaType = any> {
+export class DanCalendarEvent<MetaType = any> {
     id?: string | number;
     start: Date;
     end?: Date;
