@@ -6,6 +6,7 @@ This is a personal scheduling app built on [Angular](https://angular.io/). It us
 * Create, edit, and delete events with a title, description, color, start and end time
 * Create multiple local calendars, each able to save and persist as long as local storage is kept
 * View their schedule in three ways: month, week, and day view
+* have multiple meetings in overlapping time slots or the same slots
 
 ## Build Instructions
 
