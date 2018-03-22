@@ -269,4 +269,12 @@ export class CalendarComponent implements OnInit {
 
   }
 
+  delete(idx) {
+      this.events.splice(idx, 1)
+      this.refresh.next()
+      window.localStorage.setItem(this.calendar_name, JSON.stringify(this.events))
+      
+      this.activeDayIsOpen = false;
+  }
+
 }

@@ -52,7 +52,7 @@
         <p>
             <button
             class="btn btn-danger"
-            (click)="events.splice(index, 1); refresh.next()">
+            (click)="delete(index); close()">
             Delete
           </button>
         </p>
