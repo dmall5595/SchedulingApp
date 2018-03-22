@@ -4,7 +4,7 @@
 
 This is a personal scheduling app built on [Angular](https://angular.io/). It uses an open source [calendar component](https://github.com/mattlewis92/angular-calendar) and allows users to
 * Create, edit, and delete events with a title, description, color, start and end time.
-* ALlows the creation of multiple local calendars each able to save and persist as long as local storage is kept
+* Allows the creation of multiple local calendars each able to save and persist as long as local storage is kept
 * Has three possible ways to view events: month, week, and day view
 
 ## Build Instructions
