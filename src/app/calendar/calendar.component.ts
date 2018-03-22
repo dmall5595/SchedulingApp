@@ -244,10 +244,13 @@ export class CalendarComponent implements OnInit {
   }
 
   saveEvent() {
-    this.events.push(this.current_event);
-    this.refresh.next();
-
-    window.localStorage.setItem(this.calendar_name, JSON.stringify(this.events))
+    if (!this.events.includes(this.current_event)) {
+      this.events.push(this.current_event);
+      this.refresh.next();
+  
+      window.localStorage.setItem(this.calendar_name, JSON.stringify(this.events))
+    }
+    
   }
 
   addEventWeekDay(event) {
