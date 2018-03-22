@@ -19,4 +19,4 @@ Then enter `ng serve --open` to start server and have browser open.
 
 ## Why no backend?
 
-For simplicity sake I chose not to implement a backend at this time. It would be simple enough to add an API and a database that would simply store the users calendars. The API calls would be a get all calendars, a get specific calendar info, a put that would update a calendar, and a delete that would delete a calendar.
+For simplicity sake I chose not to implement a backend at this time. It would be simple enough to add an API and a database that would simply store the user's calendars. The API calls would be a get all calendars, a get specific calendar info, a put that would update a calendar, and a delete that would delete a calendar.
