@@ -1,6 +1,7 @@
 <ng-template #modalContent let-close="close">
     <div class="modal-header">
-      <h5 class="modal-title">Update Event</h5>
+      <h5 *ngIf="!newEvent" class="modal-title">Update Event</h5>
+      <h5 *ngIf="newEvent" class="modal-title">New Event</h5>
       <button type="button" class="close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>

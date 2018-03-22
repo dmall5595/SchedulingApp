@@ -69,6 +69,8 @@ export class CalendarComponent implements OnInit {
     event: DanCalendarEvent;
   };
 
+  newEvent = false
+
   ngOnInit() {
     this.calendar_name = this.route.snapshot.paramMap.get('id');
     //console.log(id)
@@ -199,12 +201,15 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: any): void {
+    this.newEvent = false
     this.current_event = event;
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(date): void {
+
+    this.newEvent = true
    
     if (!date)
       date = new Date()
