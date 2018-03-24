@@ -11,10 +11,12 @@ export class ChooseCalendarComponent implements OnInit {
 
   calendar_name;
 
-  choices: String[]
+  choices: String[];
 
   ngOnInit() {
     this.choices = JSON.parse(window.localStorage.getItem("all_events"))
+    if (!this.choices)
+      this.choices = []
   }
 
   delete(choice) {
